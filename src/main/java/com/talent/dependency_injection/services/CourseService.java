@@ -1,10 +1,13 @@
-package com.talent.dependency_injection;
+package com.talent.dependency_injection.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import com.talent.dependency_injection.entities.Course;
+import com.talent.dependency_injection.recommenders.CourseRecommender;
 
 @Service
 public class CourseService {
@@ -18,7 +21,7 @@ public class CourseService {
     //     this.secondaryRecommender = inRecommender;
     // }
 
-    List<Course> getRecommendedCourses(){
+    public List<Course> getRecommendedCourses(){
         return secondaryRecommender.recommendCourses();
     }
     

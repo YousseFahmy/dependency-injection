@@ -1,8 +1,11 @@
-package com.talent.dependency_injection;
+package com.talent.dependency_injection.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+
+import com.talent.dependency_injection.recommenders.CourseRecommender;
+import com.talent.dependency_injection.recommenders.ListRecommender;
+import com.talent.dependency_injection.recommenders.StackRecommender;
 
 @Configuration
 public class CourseRecommenderConfig {
@@ -14,7 +17,7 @@ public class CourseRecommenderConfig {
     }
     
     @Bean
-    public CourseRecommender secondaryRecommender(){
+    public StackRecommender secondaryRecommender(){
         return new StackRecommender();
     }
 

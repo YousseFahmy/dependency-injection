@@ -1,17 +1,19 @@
-package com.talent.dependency_injection;
+package com.talent.dependency_injection.recommenders;
 
 import java.util.List;
 import java.util.Stack;
 
-import org.springframework.stereotype.Component;
+import com.talent.dependency_injection.entities.Course;
 
-// @Component
 public class StackRecommender implements CourseRecommender{
 
     @Override
     public List<Course> recommendCourses() {
         Stack<Course> mockList = new Stack<>();
-        Course mockCourse = new Course("Stacks 101");
+        Course mockCourse = new Course(2, 
+            "Stacks 101", 
+            "A course on stacks", 
+            6);
         mockList.add(mockCourse);
         return mockList;
     }
