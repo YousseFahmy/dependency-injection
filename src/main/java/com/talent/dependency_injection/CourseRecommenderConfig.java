@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Primary;
 public class CourseRecommenderConfig {
     
     @Bean
-    @Primary
+    // @Primary
     public CourseRecommender primaryRecommender(){
         return new ListRecommender();
     }

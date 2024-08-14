@@ -10,7 +10,7 @@ public class DependencyInjectionApplication {
 	public static void main(String[] args) {
 		ApplicationContext appContext = SpringApplication.run(DependencyInjectionApplication.class, args);
 		
-		CourseService courseService = appContext.getBean("courseService", CourseService.class);
+		CourseService courseService = appContext.getBean(CourseService.class);
 		System.out.println(courseService.getRecommendedCourses());
 	}
 

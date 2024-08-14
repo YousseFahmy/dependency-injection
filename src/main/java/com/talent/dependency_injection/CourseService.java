@@ -8,12 +8,23 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CourseService {
+
     @Autowired
-    // @Qualifier("stackRecommender")
     CourseRecommender secondaryRecommender; 
+    
     // Don't forget to remove @Primary for variable priority
+    // @Autowired
+    // public CourseService(@Qualifier("secondaryRecommender") CourseRecommender inRecommender) {
+    //     this.secondaryRecommender = inRecommender;
+    // }
 
     List<Course> getRecommendedCourses(){
         return secondaryRecommender.recommendCourses();
     }
+    
+    // @Autowired
+    // @Qualifier("secondaryRecommender")
+    // public void setSecondaryRecommender(CourseRecommender secondaryRecommender) {
+    //     this.secondaryRecommender = secondaryRecommender;
+    // }
 }

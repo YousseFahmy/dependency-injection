@@ -5,7 +5,7 @@ import java.util.Stack;
 
 import org.springframework.stereotype.Component;
 
-@Component
+// @Component
 public class StackRecommender implements CourseRecommender{
 
     @Override
