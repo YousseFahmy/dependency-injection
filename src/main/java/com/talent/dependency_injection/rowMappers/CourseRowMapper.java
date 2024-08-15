@@ -16,7 +16,8 @@ public class CourseRowMapper implements RowMapper<Course> {
             resSet.getString("description"),
             resSet.getInt("credit")
         );
-        
+
+        course.setAssessmentId(resSet.getInt("assessment"));    
         return course;
     }
 }

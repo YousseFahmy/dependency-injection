@@ -5,6 +5,7 @@ public class Course {
     private String name;
     private String description;
     private int credit;
+    private int assessmentId;
 
     public Course (int id, String name, String description, int credit){
         this.id = id;
@@ -12,6 +13,14 @@ public class Course {
         this.description = description;
         this.credit = credit;
     }
+
+   public void setAssessmentId(int assessmentId) {
+       this.assessmentId = assessmentId;
+   }
+    
+   public int getAssessmentId() {
+       return assessmentId;
+   }
 
     public int getCredit() {
         return credit;
