@@ -1,5 +1,7 @@
 package com.talent.dependency_injection.repositories;
 
+import java.util.List;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -23,14 +25,19 @@ public class CourseRepository {
         );
     }
 
+    public List<Course> getCourses(){
+        String sql = "SELECT * FROM \"Course\"";
+        return jdbcTemplate.query(sql, new CourseRowMapper());
+    }
+
     public Course getCourseByID(int courseID){
         String sql = "SELECT * FROM \"Course\" WHERE id=?";
         return jdbcTemplate.queryForObject(sql, new CourseRowMapper(), courseID);
     }
 
-    public void deleteCourse(Course course){
+    public void deleteCourseById(int courseId){
         String sql = "DELETE FROM \"Course\" WHERE id=?";
-        jdbcTemplate.update(sql, course.getId());
+        jdbcTemplate.update(sql, courseId);
     }
 
     public void updateCourse(Course course){

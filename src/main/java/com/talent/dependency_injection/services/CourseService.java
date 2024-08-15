@@ -13,21 +13,10 @@ import com.talent.dependency_injection.recommenders.CourseRecommender;
 public class CourseService {
 
     @Autowired
-    CourseRecommender secondaryRecommender; 
-    
-    // Don't forget to remove @Primary for variable priority
-    // @Autowired
-    // public CourseService(@Qualifier("secondaryRecommender") CourseRecommender inRecommender) {
-    //     this.secondaryRecommender = inRecommender;
-    // }
+    @Qualifier("alphaRecommender")
+    CourseRecommender courseRecommender; 
 
     public List<Course> getRecommendedCourses(){
-        return secondaryRecommender.recommendCourses();
+        return courseRecommender.recommendCourses();
     }
-    
-    // @Autowired
-    // @Qualifier("secondaryRecommender")
-    // public void setSecondaryRecommender(CourseRecommender secondaryRecommender) {
-    //     this.secondaryRecommender = secondaryRecommender;
-    // }
 }

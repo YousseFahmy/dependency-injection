@@ -6,6 +6,7 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.talent.dependency_injection.recommenders.AlphaRecommender;
 import com.talent.dependency_injection.recommenders.CourseRecommender;
 import com.talent.dependency_injection.recommenders.ListRecommender;
 import com.talent.dependency_injection.recommenders.StackRecommender;
@@ -15,8 +16,8 @@ public class CourseRecommenderConfig {
     
     @Bean
     // @Primary
-    public CourseRecommender primaryRecommender(){
-        return new ListRecommender();
+    public CourseRecommender alphaRecommender(){
+        return new AlphaRecommender();
     }
     
     @Bean

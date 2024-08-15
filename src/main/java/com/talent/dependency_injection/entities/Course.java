@@ -1,6 +1,6 @@
 package com.talent.dependency_injection.entities;
 
-public class Course {
+public class Course implements Comparable<Course>{
     private int id;
     private String name;
     private String description;
@@ -41,5 +41,10 @@ public class Course {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    @Override
+    public int compareTo(Course otherCourse) {
+        return this.name.compareTo(otherCourse.name);
     }
 }
