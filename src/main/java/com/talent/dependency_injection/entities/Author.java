@@ -1,9 +1,12 @@
 package com.talent.dependency_injection.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Getter;
@@ -25,4 +28,7 @@ public class Author {
     @Temporal(TemporalType.DATE)
     @Getter
     private String birthdate;
+
+    @ManyToMany(mappedBy = "authors")
+    private List<Course> courses;
 }
