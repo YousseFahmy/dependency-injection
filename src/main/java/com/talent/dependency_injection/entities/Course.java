@@ -15,10 +15,12 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "course")
+@NoArgsConstructor
 public class Course implements Comparable<Course>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
