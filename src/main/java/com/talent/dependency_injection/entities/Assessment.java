@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 
 public class Assessment {
@@ -14,7 +15,8 @@ public class Assessment {
     
     @Column(nullable = false)
     @Getter
-    private int courseId;
+    @OneToOne(mappedBy = "assessment")
+    private Course courseId;
     
     @Column(length = 100, nullable = false)
     @Getter

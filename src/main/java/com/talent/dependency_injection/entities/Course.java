@@ -1,10 +1,13 @@
 package com.talent.dependency_injection.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,7 +33,9 @@ public class Course implements Comparable<Course>{
     private int credit;
     
     @Getter @Setter
-    private int assessmentId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "assessmentId" )
+    private Assessment assessment;
 
     public Course (int id, String name, String description, int credit){
         this.id = id;
