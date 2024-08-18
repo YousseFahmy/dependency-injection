@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 public class Author {
@@ -17,16 +18,19 @@ public class Author {
     @Getter
     private int id;
     
-    @Column(length = 20, nullable = false)
+    @Column(length = 20)
+    @NotNull
     @Getter
     private String name;
     
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
+    @NotNull
     @Getter
     private String email;
     
     @Temporal(TemporalType.DATE)
     @Getter
+    @NotNull
     private String birthdate;
 
     @ManyToMany(mappedBy = "authors")

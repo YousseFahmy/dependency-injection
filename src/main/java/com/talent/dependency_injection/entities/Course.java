@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,11 +26,13 @@ public class Course implements Comparable<Course>{
     private int id;
 
     @Getter
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
+    @NotNull
     private String name;
     
     @Getter
-    @Column(length = 200, nullable = false)
+    @Column(length = 200)
+    @NotNull
     private String description;
     
     @Getter

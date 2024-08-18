@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 public class Rating {
@@ -19,7 +20,8 @@ public class Rating {
     @JoinColumn(name = "courseId")
     private Course course;
     
-    @Column(nullable = false)
+    @Column
+    @NotNull
     @Getter
     private int number;
 }
