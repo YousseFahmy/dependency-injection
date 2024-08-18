@@ -1,5 +1,6 @@
 package com.talent.dependency_injection.entities;
 
+import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -34,8 +36,12 @@ public class Course implements Comparable<Course>{
     
     @Getter @Setter
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "assessmentId" )
+    @JoinColumn(name = "assessmentId")
     private Assessment assessment;
+
+    @Getter @Setter
+    @OneToMany(mappedBy = "course")
+    private List<Rating> ratings; 
 
     public Course (int id, String name, String description, int credit){
         this.id = id;
