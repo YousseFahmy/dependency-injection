@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 import com.talent.dependency_injection.recommenders.AlphaRecommender;
 import com.talent.dependency_injection.recommenders.CourseRecommender;
-import com.talent.dependency_injection.recommenders.ListRecommender;
 import com.talent.dependency_injection.recommenders.StackRecommender;
 
 @Configuration
