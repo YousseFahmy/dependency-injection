@@ -4,6 +4,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,10 +18,12 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "course")
 @NoArgsConstructor
+@ToString
 public class Course implements Comparable<Course>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +45,7 @@ public class Course implements Comparable<Course>{
     private int credit;
 
     @Getter
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "courseAuthor", 
         joinColumns = @JoinColumn(name = "courseId"),
         inverseJoinColumns = @JoinColumn(name = "authorId")
@@ -50,12 +53,12 @@ public class Course implements Comparable<Course>{
     private List<Author> authors;
     
     @Getter @Setter
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "assessmentId")
     private Assessment assessment;
 
     @Getter @Setter
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
     private List<Rating> ratings; 
 
     public Course (int id, String name, String description, int credit){

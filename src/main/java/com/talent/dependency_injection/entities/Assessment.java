@@ -20,11 +20,10 @@ public class Assessment {
     @Getter
     private int id;
     
-    @Column
     @NotNull
     @Getter
     @OneToOne(mappedBy = "assessment")
-    private Course courseId;
+    private Course course;
     
     @Column(length = 100)
     @NotNull

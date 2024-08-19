@@ -40,7 +40,7 @@ public class CourseController {
 
     @GetMapping("/{courseId}")
     public ResponseEntity<Course> getCourse(@PathVariable int courseId){
-        Course course = courseRepository.getCourseByID(courseId);
+        Course course = courseRepository.findById(courseId);
         
         return ResponseEntity.ok().body(course);
     }
@@ -48,18 +48,18 @@ public class CourseController {
     @DeleteMapping("/{courseId}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteCourse(@PathVariable int courseId){
-        courseRepository.deleteCourseById(courseId);
+        courseRepository.deleteById(courseId);
     }
     
     @PutMapping("/")
     @ResponseStatus(HttpStatus.OK)
     public void updateCourse(@RequestBody Course updatedCourse){
-        courseRepository.updateCourse(updatedCourse);
+        courseRepository.save(updatedCourse);
     }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.OK)
     public void addCourse(@RequestBody Course newCourse){
-        courseRepository.addCourse(newCourse);
+        courseRepository.save(newCourse);
     }
 }
