@@ -6,6 +6,8 @@ import com.talent.dependency_injection.entities.Author;
 
 public interface AuthorRepository extends JpaRepository<Author, Integer> {
 
-    Author findbyEmail(String email);
+    Author findById(int id);
+
+    Author findByEmail(String email);
     
 }
