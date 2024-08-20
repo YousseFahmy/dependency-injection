@@ -19,10 +19,10 @@ public class CourseRecommenderConfig {
         return new AlphaRecommender();
     }
     
-    @Bean
-    public CourseRecommender secondaryRecommender(){
-        return new StackRecommender();
-    }
+    // @Bean
+    // public CourseRecommender secondaryRecommender(){
+    //     return new StackRecommender();
+    // }
 
     @Bean
     DataSource datasource(){

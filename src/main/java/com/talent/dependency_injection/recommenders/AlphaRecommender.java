@@ -14,7 +14,7 @@ public class AlphaRecommender implements CourseRecommender {
 
     @Override
     public List<Course> recommendCourses() {
-        List<Course> courses = courseRepository.getCourses();
+        List<Course> courses = courseRepository.findAll();
         courses.sort(null);
         return courses.subList(0, 5);
     }
