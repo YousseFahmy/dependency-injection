@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.talent.dependency_injection.entities.Author;
 import com.talent.dependency_injection.mappers.AuthorDTO;
 import com.talent.dependency_injection.mappers.AuthorMapper;
 import com.talent.dependency_injection.services.AuthorService;
