@@ -23,7 +23,7 @@ public class AuthorService {
         return authorRepository.findByEmail(email).orElseThrow(() -> new AuthorDoesNotExistException(String.format("Author with email %s does not exist", email)));
     }
 
-    public Author addCourse(Author author){
+    public Author addAuthor(Author author){
         boolean authorExists = authorRepository.existsById(author.getId()).orElse(false);
         if(authorExists){
             throw new AuthorAlreadyExistsException(String.format("Author with ID %d already exists", author.getId()));
