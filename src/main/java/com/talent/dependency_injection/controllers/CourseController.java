@@ -22,15 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.talent.dependency_injection.entities.Course;
 import com.talent.dependency_injection.mappers.CourseDTO;
 import com.talent.dependency_injection.recommenders.CourseRecommender;
-import com.talent.dependency_injection.repositories.CourseRepository;
 import com.talent.dependency_injection.services.CourseService;
 
 @RestController
 @RequestMapping("/courses")
 public class CourseController {
-
-    @Autowired
-    CourseRepository courseRepository;
 
     @Autowired
     CourseService courseService;
@@ -40,35 +36,33 @@ public class CourseController {
     CourseRecommender courseRecommender;
 
     @GetMapping("/recommend")
-    public ResponseEntity<List<Course>> recommendCourses(){
-        List<Course> courses =  courseService.getRecommendedCourses();
-
-        return ResponseEntity.ok().body(courses);
+    public ResponseEntity<List<CourseDTO>> recommendCourses(){
+        List<CourseDTO> courses =  courseService.getRecommendedCourses();
+        return ResponseEntity.ok(courses);
     }
 
     @GetMapping("/{courseId}")
     public ResponseEntity<Course> getCourse(@PathVariable int courseId){
-        Course course = courseRepository.findById(courseId);
-        
+        Course course = courseService.findById(courseId);
         return ResponseEntity.ok().body(course);
     }
 
     @DeleteMapping("/{courseId}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteCourse(@PathVariable int courseId){
-        courseRepository.deleteById(courseId);
+        courseService.deleteById(courseId);
     }
     
     @PutMapping("/")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateCourse(@RequestBody Course updatedCourse){
-        courseRepository.save(updatedCourse);
+    public ResponseEntity<Course> updateCourse(@RequestBody Course updatedCourse){
+        Course savedCourse = courseService.updateCourse(updatedCourse);
+        return ResponseEntity.ok(savedCourse);
     }
 
     @PostMapping("/")
-    @ResponseStatus(HttpStatus.OK)
-    public void addCourse(@RequestBody Course newCourse){
-        courseRepository.save(newCourse);
+    public ResponseEntity<Course> addCourse(@RequestBody Course newCourse){
+        Course savedCourse = courseService.addCourse(newCourse);
+        return ResponseEntity.ok(savedCourse);
     }
 
     @GetMapping("/")
@@ -78,6 +72,6 @@ public class CourseController {
 
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         List<CourseDTO> courses = courseService.paginateCourses(pageable);
-        return ResponseEntity.ok().body(courses);
+        return ResponseEntity.ok(courses);
     }
 }
