@@ -10,11 +10,16 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "author")
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Author {
     @Id
@@ -23,16 +28,16 @@ public class Author {
     
     @Column(length = 20)
     @NotNull
-    @Getter
+    @Getter @Setter
     private String name;
     
     @Column(length = 50)
     @NotNull
-    @Getter
+    @Getter @Setter
     private String email;
     
     @Temporal(TemporalType.DATE)
-    @Getter
+    @Getter @Setter
     @NotNull
     private String birthdate;
 
