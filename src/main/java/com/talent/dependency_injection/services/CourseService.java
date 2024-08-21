@@ -39,24 +39,33 @@ public class CourseService {
         return p.stream().map(courseMapper::mapToCourseDTO).collect(Collectors.toList());
     }
 
-    public Course findById(int id){
-        return courseRepository.findById(id)
-            .orElseThrow(() -> new CourseDoesNotExistException(String.format("Course with id %d does not exist", id)));
+    public CourseDTO findById(int id){
+        Course foundCourse = courseRepository.findById(id)
+        .orElseThrow(() -> new CourseDoesNotExistException(String.format("Course with id %d does not exist", id)));
+
+        return courseMapper.mapToCourseDTO(foundCourse);
     }
 
-    public Course addCourse(Course course){
+    public CourseDTO addCourse(CourseDTO courseDTO){
+        Course course = courseMapper.mapToCourse(courseDTO);
+
         boolean courseExists = courseRepository.existsById(course.getId()).orElse(false);
         if(courseExists){
             throw new CourseAlreadyExistsException(String.format("Course with ID %d already exists", course.getId()));
         }
 
-        return courseRepository.save(course);
+        Course savedCourse = courseRepository.save(course);
+        return courseMapper.mapToCourseDTO(savedCourse);
     }
 
-    public Course updateCourse(Course course){
+    public CourseDTO updateCourse(CourseDTO courseDTO){
+        Course course = courseMapper.mapToCourse(courseDTO);
+
         courseRepository.existsById(course.getId())
             .orElseThrow(() -> new CourseDoesNotExistException(String.format("Course with ID %d does not exist", course.getId())));
-        return courseRepository.save(course);
+
+        Course updatedCourse = courseRepository.save(course);
+        return courseMapper.mapToCourseDTO(updatedCourse);
     }
 
     public void deleteById(int id){

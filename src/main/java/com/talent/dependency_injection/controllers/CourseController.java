@@ -42,9 +42,9 @@ public class CourseController {
     }
 
     @GetMapping("/{courseId}")
-    public ResponseEntity<Course> getCourse(@PathVariable int courseId){
-        Course course = courseService.findById(courseId);
-        return ResponseEntity.ok().body(course);
+    public ResponseEntity<CourseDTO> getCourse(@PathVariable int courseId){
+        CourseDTO courseDTO = courseService.findById(courseId);
+        return ResponseEntity.ok().body(courseDTO);
     }
 
     @DeleteMapping("/{courseId}")
@@ -54,15 +54,15 @@ public class CourseController {
     }
     
     @PutMapping("/")
-    public ResponseEntity<Course> updateCourse(@RequestBody Course updatedCourse){
-        Course savedCourse = courseService.updateCourse(updatedCourse);
+    public ResponseEntity<CourseDTO> updateCourse(@RequestBody CourseDTO updatedCourseDTO){
+        CourseDTO savedCourse = courseService.updateCourse(updatedCourseDTO);
         return ResponseEntity.ok(savedCourse);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Course> addCourse(@RequestBody Course newCourse){
-        Course savedCourse = courseService.addCourse(newCourse);
-        return ResponseEntity.ok(savedCourse);
+    public ResponseEntity<CourseDTO> addCourse(@RequestBody CourseDTO newCourseDTO){
+        CourseDTO savedCourseDTO = courseService.addCourse(newCourseDTO);
+        return ResponseEntity.ok(savedCourseDTO);
     }
 
     @GetMapping("/")
