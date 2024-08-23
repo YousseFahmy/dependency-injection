@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.talent.dependency_injection.mappers.AuthorDTO;
-import com.talent.dependency_injection.mappers.AuthorMapper;
 import com.talent.dependency_injection.services.AuthorService;
 
 @RestController
@@ -18,10 +18,7 @@ import com.talent.dependency_injection.services.AuthorService;
 public class AuthorController {
     @Autowired
     AuthorService authorService;
-
-    @Autowired
-    AuthorMapper authorMapper;
-
+    
     @GetMapping("/{authorId}")
     public ResponseEntity<AuthorDTO> getAuthor(@PathVariable int authorId){
         AuthorDTO author = authorService.findById(authorId);
@@ -35,8 +32,8 @@ public class AuthorController {
     }
 
     @PostMapping()
-    public ResponseEntity<AuthorDTO> addAuthor(AuthorDTO author){
-        AuthorDTO savedAuthor = authorService.addAuthor(author);
-        return ResponseEntity.ok(savedAuthor);
+    public ResponseEntity<AuthorDTO> addAuthor(@RequestBody AuthorDTO newAuthorDTO){
+        AuthorDTO savedAuthorDTO = authorService.addAuthor(newAuthorDTO);
+        return ResponseEntity.ok(savedAuthorDTO);
     }
 }
