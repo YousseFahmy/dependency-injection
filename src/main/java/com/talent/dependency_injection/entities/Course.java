@@ -16,17 +16,17 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name = "course")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@Data
 public class Course implements Comparable<Course>{
     @Id
     @Getter
@@ -62,13 +62,6 @@ public class Course implements Comparable<Course>{
     @Getter @Setter
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
     private List<Rating> ratings; 
-
-    public Course (int id, String name, String description, int credit){
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.credit = credit;
-    }
 
     @Override
     public int compareTo(Course otherCourse) {
