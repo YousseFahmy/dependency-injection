@@ -19,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -37,7 +38,8 @@ import com.talent.dependency_injection.services.AuthorService;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-@WebMvcTest(controllers = AuthorController.class)
+@WebMvcTest(controllers = AuthorController.class,
+    excludeAutoConfiguration = SecurityAutoConfiguration.class)
 @ContextConfiguration(classes = AuthorController.class)
 public class AuthorControllerTests {
     
