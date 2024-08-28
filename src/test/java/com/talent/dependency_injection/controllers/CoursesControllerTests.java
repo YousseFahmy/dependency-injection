@@ -28,13 +28,16 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,12 +46,14 @@ import com.talent.dependency_injection.exceptions.CourseDoesNotExistException;
 import com.talent.dependency_injection.exceptions.GlobalExceptionHandler;
 import com.talent.dependency_injection.mappers.CourseDTO;
 import com.talent.dependency_injection.recommenders.CourseRecommender;
+import com.talent.dependency_injection.security.HeaderAuthentication;
 import com.talent.dependency_injection.services.CourseService;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-@WebMvcTest(controllers = CourseController.class)
-@ContextConfiguration(classes = CourseController.class)
+@WebMvcTest(controllers = CourseController.class, 
+        excludeAutoConfiguration = SecurityAutoConfiguration.class)
+@ContextConfiguration(classes = {CourseController.class})
 public class CoursesControllerTests {
 
     @MockBean
@@ -84,15 +89,18 @@ public class CoursesControllerTests {
 
         when(globalExceptionHandler.handleCourseAlreadyExistsException(
                 any(CourseAlreadyExistsException.class))).thenReturn(ResponseEntity.badRequest().build());
+
+        SecurityContextHolder.getContext().setAuthentication(new HeaderAuthentication());
     }
 
     @Test
     public void getCourseById_AuthorExists_Ok() throws Exception {
-        when(courseService.findById(anyInt())).thenReturn(course);
+        when(courseService.findById(1)).thenReturn(course);
 
         ResultActions response = mockMvc.perform(get("/courses/{id}", course.getId()));
 
-        response.andExpect(status().isOk())
+        response.andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(course.getId())))
                 .andExpect(jsonPath("$.name", is(course.getName())))

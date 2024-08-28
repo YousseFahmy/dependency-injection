@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,6 +63,7 @@ public class CourseController {
         return ResponseEntity.ok(savedCourseDTO);
     }
 
+    @PreAuthorize("hasRole('admin')")
     @GetMapping("/")
     public ResponseEntity<List<CourseDTO>> paginateCourses(@RequestBody Map<String, Integer> reqBody){
         int pageNumber = reqBody.get("page");
