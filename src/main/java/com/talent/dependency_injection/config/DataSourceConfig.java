@@ -12,9 +12,9 @@ public class DataSourceConfig {
     @Bean
     DataSource datasource(){
         DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.url("jdbc:postgresql://localhost:5432/TalentProgram?currentSchema=public");
-        dataSourceBuilder.username("postgres");
-        dataSourceBuilder.password("postgres");
+        dataSourceBuilder.url("jdbc:mysql://localhost:3306/TalentProgram");
+        dataSourceBuilder.username("dbUser");
+        dataSourceBuilder.password("mysql");
         return dataSourceBuilder.build();
     }
 
