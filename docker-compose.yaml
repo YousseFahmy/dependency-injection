@@ -1,0 +1,13 @@
+volumes:
+  mysqlVolume:
+services:
+  database:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+      - MYSQL_USER=dbUser
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_DATABASE=TalentProgram
+    ports:
+      - "3306:3306"
+      - "33060:33060"
